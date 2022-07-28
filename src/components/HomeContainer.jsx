@@ -45,12 +45,12 @@ const HomeContainer = () => {
           className='ml-auto h-420 w-full lg:w-autos'
           alt='hero-bg'
         />
-        <div className='w-full h-full absolute top-0 left-0 flex items-center justify-center py-4 gap-2 flex-wrap'>
+        <div className='w-full h-full absolute top-0 left-0 flex items-center justify-center lg:px-30 py-3 gap-2 flex-wrap'>
           {heropData &&
             heropData.map(item => (
               <div
                 key={item.id}
-                className='w-190 p-4 bg-cardOverlay  backdrop-blur-md rounded-3xl flex flex-col items-center justify-center cursor-pointer drop-shadow-lg'
+                className='w-170 lg:w-190 p-3 bg-cardOverlay  backdrop-blur-md rounded-3xl flex flex-col items-center justify-center cursor-pointer drop-shadow-lg'
               >
                 <img src={item.image} className='w-20 lg:w-25 -mt-30 ' alt='' />
                 <p className='text-lg font-semibold text-textColor'>
