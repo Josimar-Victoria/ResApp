@@ -11,7 +11,7 @@ import { actionType } from '../context/reducer'
 import { useState } from 'react'
 
 const Header = () => {
-  const [{ user }, dispatch] = useStateValue()
+  const [{ user, cartShow, cartItems }, dispatch] = useStateValue()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const firebaseAuth = getAuth(app)
@@ -39,6 +39,13 @@ const Header = () => {
     })
     localStorage.clear()
     setIsMenuOpen(false)
+  }
+
+  const handleShowCart = () => {
+    dispatch({
+      type: actionType.SET_CART_SHOW,
+      cartShow: !cartShow
+    })
   }
 
   return (
@@ -81,12 +88,20 @@ const Header = () => {
               Service
             </li>
           </ul>
-          <div className='relative flex items-center justify-center'>
+          <motion.div
+            whileTap={{ scale: 0.9 }}
+            className='relative flex items-center justify-center'
+            onClick={handleShowCart}
+          >
             <MdShoppingBasket className='text-textColor text-2xl ml-8 cursor-pointer hover:text-headingColor' />
-            <div className=' absolute -top-2 -right-2 w-6 h-6 rounded-full bg-cartNumbg flex items-center justify-center'>
-              <p className='text-xs text-white font-semibold'>2</p>
-            </div>
-          </div>
+            {cartItems && cartItems.length > 0 && (
+              <div className=' absolute -top-2 -right-2 w-6 h-6 rounded-full bg-cartNumbg flex items-center justify-center'>
+                <p className='text-xs text-white font-semibold'>
+                  {cartItems.length}
+                </p>
+              </div>
+            )}
+          </motion.div>
           <div className='relative'>
             <motion.img
               whileTap={{ scale: 0.6 }}
@@ -128,13 +143,21 @@ const Header = () => {
       {/* Movil */}
       <div className='flex items-center justify-between md:hidden w-full h-full '>
         <Link to='/shoppin'>
-          <div className='relative flex items-center justify-center'>
+          <motion.div
+            className='relative flex items-center justify-center'
+            onClick={handleShowCart}
+          >
             <MdShoppingBasket className='text-textColor text-2xl ml-8 cursor-pointer hover:text-headingColor' />
-            <div className=' absolute -top-2 -right-2 w-6 h-6 cursor-pointer rounded-full bg-cartNumbg flex items-center justify-center'>
-              <p className='text-xs text-white font-semibold'>2</p>
-            </div>
-          </div>
+            {cartItems && cartItems.length > 0 && (
+              <div className=' absolute -top-2 -right-2 w-6 h-6 rounded-full bg-cartNumbg flex items-center justify-center'>
+                <p className='text-xs text-white font-semibold'>
+                  {cartItems.length}
+                </p>
+              </div>
+            )}
+          </motion.div>
         </Link>
+
         <Link to='/' className='flex items-center gap-2'>
           <img className='w-10 object-cover' src={Logo} alt='Logo' />
           <p className='text-headingColor text-x font-bold'>City</p>

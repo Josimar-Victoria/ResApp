@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { IoFastFood } from 'react-icons/io5'
 import { categories } from '../util/data'
 import { motion } from 'framer-motion'
